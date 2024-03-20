@@ -26,6 +26,3 @@ For further funcionality implementations, you need to change the design and impl
 현재 디자인 및 구현은 앞으로 게임을 위한 다양한 기능을 구현하기에 적절한 상태가 아니니 단순한 참고용으로 사용하시기 바랍니다.  
 구현 과정에서 원하는 경우 다른 오픈소스 라이브러리 등을 가져와 사용해도 좋습니다.
 
-네.
-에
-ㅇ
