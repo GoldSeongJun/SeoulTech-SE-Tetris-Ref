@@ -243,7 +243,7 @@ public class Board extends JFrame {
 
 		@Override
 		public void keyReleased(KeyEvent e) {
-			// 키가 떼어졌을 때의 동작을 정의할 수 있으나, 여기서는 사용하지 않습니다.
+			// 키가 떼어졌을 때의 동작을 정의할 수 있으나, 여기서는 사용하지 않습니다..
 		}
 	}
 
