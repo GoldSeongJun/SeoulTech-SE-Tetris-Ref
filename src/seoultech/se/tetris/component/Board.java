@@ -1,7 +1,6 @@
 package seoultech.se.tetris.component;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -16,6 +15,9 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
 
 import seoultech.se.tetris.blocks.Block;
 import seoultech.se.tetris.blocks.IBlock;
@@ -36,7 +38,7 @@ public class Board extends JFrame {
 	
 	public static final int HEIGHT = 20; // 높이
 	public static final int WIDTH = 10; // 너비
-	public static final char BORDER_CHAR = 'O'; //게임 테두리 문자
+	public static final char BORDER_CHAR = 'X'; //게임 테두리 문자
 	
 	private JTextPane pane; //게임 상태 표시하는 JTextPane 객체
 	private int[][] board; // 게임 보드의 상태를 나타내는 2차원 배열
@@ -62,15 +64,24 @@ public class Board extends JFrame {
 				BorderFactory.createLineBorder(Color.GRAY, 10),
 				BorderFactory.createLineBorder(Color.DARK_GRAY, 5)); // 복합 테두리 생성
 		pane.setBorder(border); // 텍스트 패널에 테두리를 설정
+		Border innerPadding = new EmptyBorder(5, 20, 5, 0); // 상단, 왼쪽, 하단, 오른쪽 여백 설정
+
+// 기존 복합 테두리와 내부 여백을 결합한 새로운 복합 테두리 생성
+		CompoundBorder newBorder = new CompoundBorder(border, innerPadding);
+
+// 텍스트 패널에 새로운 테두리 설정
+		pane.setBorder(newBorder);
 		this.getContentPane().add(pane, BorderLayout.CENTER); // 텍스트 패널을 창의 중앙에 추가.this는 Board클래스의 인스턴스를 지칭
 		
 		//Document default style.
 		styleSet = new SimpleAttributeSet(); // 스타일 설정을 위한 객체 생성
-		StyleConstants.setFontSize(styleSet, 18); // 폰트 크기를 18로 설정
+		StyleConstants.setFontSize(styleSet, 20); // 폰트 크기를 18로 설정
 		StyleConstants.setFontFamily(styleSet, "Consolas");// 폰트 종류를 mac은 Courier로 설정, window는 consolas로 설정
 		StyleConstants.setBold(styleSet, true); // 폰트를 굵게 설정
 		StyleConstants.setForeground(styleSet, Color.WHITE); // 폰트 색상을 흰색으로 설정
-		StyleConstants.setAlignment(styleSet, StyleConstants.ALIGN_CENTER); // 텍스트 정렬을 가운데로 설정
+
+
+		StyleConstants.setAlignment(styleSet, StyleConstants.ALIGN_LEFT); // 텍스트 정렬을 가운데로 설정
 		
 		//Set timer for block drops.
 		timer = new Timer(initInterval, new ActionListener() {			
