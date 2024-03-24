@@ -33,7 +33,17 @@ public abstract class Block {
 
 	//rotate 메서드는 블록을 90도 시계 방향으로 회전시키기 위한 메서드
 	public void rotate() {
-		//Rotate the block 90 deg. clockwise.
+		int originalHeight = height();
+		int originalWidth = width();
+		int[][] newShape = new int[originalWidth][originalHeight];
+
+		for (int i = 0; i < originalHeight; i++) {
+			for (int j = 0; j < originalWidth; j++) {
+				newShape[j][originalHeight - 1 - i] = shape[i][j];
+			}
+		}
+
+		shape = newShape;
 	}
 
 
