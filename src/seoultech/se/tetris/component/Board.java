@@ -36,7 +36,7 @@ public class Board extends JFrame {
 	
 	public static final int HEIGHT = 20; // 높이
 	public static final int WIDTH = 10; // 너비
-	public static final char BORDER_CHAR = 'X'; //게임 테두리 문자
+	public static final char BORDER_CHAR = 'O'; //게임 테두리 문자
 	
 	private JTextPane pane; //게임 상태 표시하는 JTextPane 객체
 	private int[][] board; // 게임 보드의 상태를 나타내는 2차원 배열
@@ -51,13 +51,13 @@ public class Board extends JFrame {
 	
 	// 생성자 Board, 게임 창 설정 및 초기게임 보드 준비, 첫 번째 블록 생성하고, 타이머 시작
 	public Board() {
-		super("SeoulTech SE Tetris"); //창의 제목을 "SeoulTech SE Tetris"로 설정
+		super("3조 테트리스 게임"); //창의 제목을 "SeoulTech SE Tetris"로 설정
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 창을 닫을 때 프로그램이 종료되도록 설정
 		
 		//Board display setting.
 		pane = new JTextPane(); // 텍스트 패널 생성
 		pane.setEditable(false); // 텍스트 패널 편집 불가하도록 설정
-		pane.setBackground(Color.BLACK); // 텍스트 패널의 배경색을 검은새긍로 설정
+		pane.setBackground(Color.BLACK); // 텍스트 패널의 배경색을 검은색으로 설정
 		CompoundBorder border = BorderFactory.createCompoundBorder(
 				BorderFactory.createLineBorder(Color.GRAY, 10),
 				BorderFactory.createLineBorder(Color.DARK_GRAY, 5)); // 복합 테두리 생성
@@ -67,7 +67,7 @@ public class Board extends JFrame {
 		//Document default style.
 		styleSet = new SimpleAttributeSet(); // 스타일 설정을 위한 객체 생성
 		StyleConstants.setFontSize(styleSet, 18); // 폰트 크기를 18로 설정
-		StyleConstants.setFontFamily(styleSet, "Courier");// 폰트 종류를 Courier로 설정
+		StyleConstants.setFontFamily(styleSet, "Consolas");// 폰트 종류를 mac은 Courier로 설정, window는 consolas로 설정
 		StyleConstants.setBold(styleSet, true); // 폰트를 굵게 설정
 		StyleConstants.setForeground(styleSet, Color.WHITE); // 폰트 색상을 흰색으로 설정
 		StyleConstants.setAlignment(styleSet, StyleConstants.ALIGN_CENTER); // 텍스트 정렬을 가운데로 설정
@@ -97,7 +97,7 @@ public class Board extends JFrame {
 
 	private Block getRandomBlock() {
 		Random rnd = new Random(System.currentTimeMillis()); // 현재 시간 기준으로 랜덤 객체 생성
-		int block = rnd.nextInt(6); // 0부터 6사이의 난수를 생성
+		int block = rnd.nextInt(7); // 0부터 7사이의 난수를 생성
 		switch(block) {
 		case 0:
 			return new IBlock(); // I 모양 블록 생성 반환
@@ -182,7 +182,8 @@ public class Board extends JFrame {
 
 		// 게임 보드의 각 행을 순회합니다.
 		for (int i = 0; i < board.length; i++) {
-			sb.append(BORDER_CHAR); // 각 행의 시작에 경계 문자를 추가합니다.
+
+				sb.append(BORDER_CHAR); // 각 행의 시작에 경계 문자를 추가합니다.
 
 			// 게임 보드의 각 열을 순회합니다.
 			for (int j = 0; j < board[i].length; j++) {
